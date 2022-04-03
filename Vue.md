@@ -38,6 +38,18 @@ Vue.js 개발가이드_v0.1
 - vue create "프로젝트명(폴더)" "--no-git", 설치옵션 선택 후, 설치완료
 - 프로젝트 생성 후, 프로젝트실행, npm run serve (프로젝트생성 폴더내에서나 해당 경로지정)
 - vue.config.js 설정파일내, 빌드결과 파일위치, index위치, 서버연결url주소 등 설정
+- module.exports = {
+	outputDir: "../src/main/resources/static", // npm run build 빌드 시 파일이 생성되는 위치 
+	indexPath: "../static/index.html", // index.html 파일이 생성될 위치 
+	devServer: { 
+		// Back-End, Spring Boot의 내장 was 주소 입력 
+		proxy: "http://localhost:8080" 
+	}, 
+	chainWebpack: config => { 
+		const svgRule = config.module.rule("svg"); 
+		svgRule.uses.clear(); 
+		svgRule.use("vue-svg-loader").loader("vue-svg-loader"); 
+	}
 - 프로젝트 빌드, npm run build
 
 2. Vue.js 특성 및 장점
